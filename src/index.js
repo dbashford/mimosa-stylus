@@ -3,13 +3,14 @@
 var fs = require( 'fs' )
   , path = require( 'path' )
   , _ = require( 'lodash' )
-  , logger = require( 'logmimosa' )
+  , logger = null
   , config = require( './config' )
   , importRegex = /@import[\s\t]*[\(]?[\s\t]*['"]?([a-zA-Z0-9*\/\.\-\_]*)[\s\t]*[\n;\s'")]?/g
   , getImportFilePath = function ( baseFile, importPath ) {
     return path.join( path.dirname( baseFile ), importPath );
   }
   , getExtensions = function ( mimosaConfig ) {
+    logger = mimosaConfig.log;
     return mimosaConfig.stylus.extensions;
   };
 
