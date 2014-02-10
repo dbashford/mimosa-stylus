@@ -19,7 +19,7 @@ var compile = function ( mimosaConfig, file, done ) {
     , text = file.inputFileText
     , fileName = file.inputFileName
     , cb = function ( err, css ) {
-      if ( logger.isDebug ) {
+      if ( logger.isDebug() ) {
         logger.debug( "Finished Stylus compile for file [[ " + fileName + " ]], errors? " + !!err );
       }
       done( err, css );
@@ -60,7 +60,7 @@ var compile = function ( mimosaConfig, file, done ) {
     stylusSetup.define( define, mimosaConfig.stylus.define[define] );
   });
 
-  if ( logger.isDebug ) {
+  if ( logger.isDebug() ) {
     logger.debug( "Compiling Stylus file [[ " + fileName + " ]]" );
   }
 
@@ -91,7 +91,7 @@ var determineBaseFiles = function ( allFiles ) {
   });
 
   baseFiles = _.difference( allFiles, imported );
-  if ( logger.isDebug ) {
+  if ( logger.isDebug() ) {
     logger.debug( "Base files for Stylus are:\n" + baseFiles.join( '\n' ) );
   }
   return baseFiles;
