@@ -1,13 +1,13 @@
 "use strict";
 
-var path = require( 'path' );
+var path = require( "path" );
 
 exports.defaults = function() {
   return {
     stylus: {
       extensions: [ "styl" ],
-      use: [ 'nib' ],
-      import: [ 'nib' ],
+      use: [ "nib" ],
+      import: [ "nib" ],
       define: {},
       includes: []
     }
@@ -15,15 +15,15 @@ exports.defaults = function() {
 };
 
 exports.placeholder = function() {
-  return "\t\n\n"+
-         "  # stylus:                  # config settings for the Stylus compiler module\n" +
-         "    # lib: undefined         # use this property to provide a specific version of Stylus\n" +
-         "    # extensions: [\"styl\"]   # default extensions for Stylus files\n" +
-         "    # use:['nib']            # names of libraries to use, should match the npm name for\n" +
-         "                             # the desired libraries\n" +
-         "    # import:['nib']         # Files to import for compilation\n" +
-         "    # define: {}             # An object containing stylus variable defines\n" +
-         "    # includes: []           # Files to include for compilation\n";
+  return "\t\n\n" +
+         "  stylus:                  # config settings for the Stylus compiler module\n" +
+         "    lib: undefined         # use this property to provide a specific version of Stylus\n" +
+         "    extensions: [\"styl\"] # default extensions for Stylus files\n" +
+         "    use:['nib']            # names of libraries to use, should match the npm name for\n" +
+         "                           # the desired libraries\n" +
+         "    import:['nib']         # Files to import for compilation\n" +
+         "    define: {}             # An object containing stylus variable defines\n" +
+         "    includes: []           # Files to include for compilation\n";
 };
 
 exports.validate = function( config, validators ) {
@@ -32,7 +32,7 @@ exports.validate = function( config, validators ) {
   if ( validators.ifExistsIsObject( errors, "stylus config", config.stylus ) ) {
 
     if ( !config.stylus.lib ) {
-      config.stylus.lib = require( 'stylus' );
+      config.stylus.lib = require( "stylus" );
     }
 
     if ( validators.isArrayOfStringsMustExist( errors, "stylus.extensions", config.stylus.extensions ) ) {
@@ -48,7 +48,7 @@ exports.validate = function( config, validators ) {
     if ( validators.ifExistsIsArrayOfStrings(errors, "stylus.use", config.stylus.use) ) {
 
       config.stylus.resolvedUse = [];
-      var projectNodeModules = path.resolve( process.cwd(), 'node_modules' );
+      var projectNodeModules = path.resolve( process.cwd(), "node_modules" );
       config.stylus.use.forEach( function ( imp ) {
         var lib;
         try {
@@ -57,7 +57,7 @@ exports.validate = function( config, validators ) {
           try {
             lib = require( path.join( projectNodeModules, imp ) );
           } catch ( err ) {
-            console.log( err );
+            config.log.error( err );
           }
         }
 

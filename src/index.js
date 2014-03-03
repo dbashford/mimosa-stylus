@@ -1,10 +1,10 @@
 "use strict";
 
-var fs = require( 'fs' )
-  , path = require( 'path' )
-  , _ = require( 'lodash' )
+var fs = require( "fs" )
+  , path = require( "path" )
+  , _ = require( "lodash" )
   , logger = null
-  , config = require( './config' )
+  , config = require( "./config" )
   , importRegex = /@import[\s\t]*[\(]?[\s\t]*['"]?([a-zA-Z0-9*\/\.\-\_]*)[\s\t]*[\n;\s'")]?/g
   , getImportFilePath = function ( baseFile, importPath ) {
     return path.join( path.dirname( baseFile ), importPath );
@@ -28,14 +28,14 @@ var compile = function ( mimosaConfig, file, done ) {
   stylusSetup = mimosaConfig.stylus.lib( text )
     .include( path.dirname( fileName ) )
     .include( mimosaConfig.watch.sourceDir )
-    .set( 'compress', false )
-    .set( 'filename', fileName )
-    .set( 'include css', true );
+    .set( "compress", false )
+    .set( "filename", fileName )
+    .set( "include css", true );
     //.set('firebug', not mimosaConfig.isOptimize)
     //.set('linenos', not mimosaConfig.isOptimize and not mimosaConfig.isBuild)
 
   if ( mimosaConfig.stylus.url ) {
-    stylusSetup.define( 'url', mimosaConfig.stylus.lib.url( mimosaConfig.stylus.url ) );
+    stylusSetup.define( "url", mimosaConfig.stylus.lib.url( mimosaConfig.stylus.url ) );
   }
 
   if ( mimosaConfig.stylus.includes ) {
@@ -73,7 +73,7 @@ var determineBaseFiles = function ( allFiles ) {
     , baseFiles;
 
   allFiles.forEach( function( file ) {
-    var imports = fs.readFileSync( file, 'utf8' ).match( importRegex );
+    var imports = fs.readFileSync( file, "utf8" ).match( importRegex );
     if ( imports ) {
       imports.forEach( function( anImport ) {
         importRegex.lastIndex = 0;
@@ -92,7 +92,7 @@ var determineBaseFiles = function ( allFiles ) {
 
   baseFiles = _.difference( allFiles, imported );
   if ( logger.isDebug() ) {
-    logger.debug( "Base files for Stylus are:\n" + baseFiles.join( '\n' ) );
+    logger.debug( "Base files for Stylus are:\n" + baseFiles.join( "\n" ) );
   }
   return baseFiles;
 };
