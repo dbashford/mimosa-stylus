@@ -31,8 +31,10 @@ var compile = function ( mimosaConfig, file, done ) {
     .set( "compress", false )
     .set( "filename", fileName )
     .set( "include css", true );
-    //.set('firebug', not mimosaConfig.isOptimize)
-    //.set('linenos', not mimosaConfig.isOptimize and not mimosaConfig.isBuild)
+
+  if( mimosaConfig.stylus.sourceMap ) {
+    stylusSetup.set( "sourcemap", { inline: true } );
+  }
 
   if ( mimosaConfig.stylus.url ) {
     stylusSetup.define( "url", mimosaConfig.stylus.lib.url( mimosaConfig.stylus.url ) );

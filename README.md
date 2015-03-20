@@ -19,14 +19,16 @@ Mimosa core does a little bit of extra work with Stylus. Mimosa takes care not t
 
 ## Default Config
 
-```coffeescript
-stylus:
-  lib: undefined
-  extensions: ["styl"]
-  use:['nib']
-  import:['nib']
-  define:{}
-  includes:[]
+```javascript
+stylus: {
+  lib: undefined,
+  extensions: ["styl"],
+  use:['nib'],
+  import:['nib'],
+  define:{},
+  includes:[],
+  sourceMap: true
+}
 ```
 
 * `lib`: You may want to use this module but may not be ready to use the latest version of Stylus. Using the `lib` property you can provide a specific version of Stylus if the one being used by this module isn't to your liking. To provide a specific version, you must have it `npm install`ed into your project and then provide it to `lib`. For instance: `lib: require('stylus')`.
@@ -35,5 +37,6 @@ stylus:
 * `import`: an array of strings, import resources at compile time rather than in your stylesheet.
 * `define`:  an object, define variables programmtically instead of in your stylesheet.
 * `includes`: an array of paths to include for all compile
+* `sourceMap`: whether or not to include inline source maps. `sourceMap` is automatically set to `false` for `mimosa build` as it is assumed to not be a dev time command.
 
 See the [Stylus docs](http://learnboost.github.io/stylus/docs/js.html) for more information on the options (`use`, `import`, `define`, `includes`) for passing information to the Stylus compiler.

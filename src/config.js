@@ -9,7 +9,8 @@ exports.defaults = function() {
       use: [ "nib" ],
       import: [ "nib" ],
       define: {},
-      includes: []
+      includes: [],
+      sourceMap: true
     }
   };
 };
@@ -28,6 +29,8 @@ exports.validate = function( config, validators ) {
         errors.push( "stylus.extensions cannot be an empty array");
       }
     }
+
+    validators.ifExistsIsBoolean( errors, "stylus.sourceMap", config.stylus.sourceMap );
 
     validators.ifExistsIsObject( errors, "stylus.define", config.stylus.define );
     validators.ifExistsIsArrayOfStrings( errors, "stylus.import", config.stylus.import );
@@ -56,6 +59,11 @@ exports.validate = function( config, validators ) {
         }
       });
     }
+  }
+
+  // turn off source maps during build
+  if ( !errors.length && config.isBuild ) {
+    config.stylus.sourceMap = false;
   }
 
   return errors;
