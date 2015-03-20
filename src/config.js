@@ -14,18 +14,6 @@ exports.defaults = function() {
   };
 };
 
-exports.placeholder = function() {
-  return "\t\n\n" +
-         "  stylus:                  # config settings for the Stylus compiler module\n" +
-         "    lib: undefined         # use this property to provide a specific version of Stylus\n" +
-         "    extensions: [\"styl\"] # default extensions for Stylus files\n" +
-         "    use:['nib']            # names of libraries to use, should match the npm name for\n" +
-         "                           # the desired libraries\n" +
-         "    import:['nib']         # Files to import for compilation\n" +
-         "    define: {}             # An object containing stylus variable defines\n" +
-         "    includes: []           # Files to include for compilation\n";
-};
-
 exports.validate = function( config, validators ) {
   var errors = [];
 
